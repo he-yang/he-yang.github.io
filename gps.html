@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>S WTSolutions-照片to谷歌地球</title>
+<meta name="description" content="S WTSolutions GPS 照片一键导入谷歌地球 Google Earth">
+<meta name="keywords" content="照片to谷歌地球,WTSolutions,照片,谷歌地球,Google Earth">
+<meta name="author" content="He Yang<he.yang@wtsolutions.cn>">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="https://t.wtsolutions.cn/favicon.ico" type="image/x-icon">
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jszip/3.1.3/jszip.min.js"></script>
+<script src="scripts/exif.js"></script>
+<script src="scripts/FileSaver.js"></script>
+<script src="scripts/gps.min.js"></script>
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script src="https://cdn.bootcss.com/fingerprintjs2/1.5.1/fingerprint2.min.js"></script>
+</head>
+
+
+
+<body  style="padding-bottom: 70px">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button data-toggle="collapse" data-target="#div_nav" type="button" aria-expanded="false" class="navbar-toggle collapsed"><span class="sr-only">导航</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="#" class="navbar-brand"><img src="/logo.png" width="50" height="50"></a>
+            </div>
+            <div id="div_nav" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                <li><a href="/">更多软件</a></li>
+                <!--<li><a href="/logged_in">登录</a></li>-->
+                <li><a href="//w.wtsolutions.cn" target="_blank">开放数据库</a></li>
+                <li><a href="/why">Why WTSolutions S</a></li>
+                <!--<li><a href="/about">About WTSolutions S</a></li>-->
+                </ul>
+            </div>
+        </div>
+    </nav>
+<div class="container" style="margin-top:80px">
+    
+    
+    <h2>照片to谷歌地球v0.6.3</h2>
+    <p><a href="/gps-en.html" target="_blank">English Online Version</a> <a href="/gps.html" target="_blank">中文在线版</a> <a href="/gps-app.html" target="_blank">中文软件版</a></p>
+    
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"照片to谷歌地球是一款跨平台将照片导入Google Earth/谷歌地球的图片信息处理软件，支持Windows/Mac/iOS/Linux/Android系统，无需下载无需安装。它能读取照片的GPS信息并生成谷歌地球可以读取的KMZ格式文件。继而，谷歌地球可根据各照片GPS信息在相应位置显示照片。","bdMini":"2","bdMiniList":false,"bdPic":"http://blog.wtsolutions.cn/wp-content/uploads/2016/08/GPS-DEMO.png","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+	<p>
+		照片to谷歌地球是一款跨平台将照片导入Google Earth/谷歌地球的图片信息处理软件，支持Windows/Mac/iOS/Linux/Android系统，无需下载无需安装。它能读取照片的GPS信息并生成谷歌地球可以读取的KMZ格式文件。继而，谷歌地球可根据各照片GPS信息在相应位置显示照片。
+	</p>
+	<div class="alert alert-danger" role="alert">
+		<!--如果此版本无法使用，请使用<a href='gpsv0.1.2.html'>旧版v0.1.2</a> 如有任何问题，请在下方评论区留言。<br>-->
+        Google Earth无法正常打开或显示非常缓慢怎么办？ <a href="http://blog.wtsolutions.cn/archives/446" target="_blank">http://blog.wtsolutions.cn/archives/446</a><br>
+        系统将收集图片的GPS信息，用于数据统计。<br>
+        <img src="/logo.png" height="20px" /><a href="http://blog.wtsolutions.cn/contactus" target="_blank">联系作者</a><br>
+        <strong><span id="gpscount"></span></strong>
+        <!--<strong>加Q群互动交流 514903894</strong><br>
+        2016-12-15 照片to谷歌地球已经处理过超过10000张图片，感谢大家对照片to谷歌地球的喜爱，没想到这么短时间就有那么多喜欢照片to谷歌地球的朋友。<br>-->
+        <p>新gps工具，<a href='https://s.wtsolutions.cn/sitesurvey.html' target="_blank">S WTSolutions GPS点位信息收集工具</a>，多人多设备实时收集GPS点位对应信息，实时共享显示数据，支持一键导出，支持安卓、苹果、Windows手机设备。</p>
+        <h2><a href="https://wj.qq.com/s/1579803/f002" target="_blank">有奖问卷调查</a></h2>
+	</div>
+    <!--
+    <div class="alert alert-warning" role="alert">
+        小调查，最近准备添加一个功能，针对每个图片，可以输入一两句话对图片进行描述，然后会跟随图片一起显示，这个功能会有用吗？加入Q群 514903894 可以与作者互动交流
+    </div>
+    -->
+
+	<!--<form onsubmit="return!1" class="form-inline">-->
+
+        
+
+        <noscript><b>当前浏览器禁用了javascript，将无法正常使用本服务。请查找 你所使用的浏览器对应的javascript开启方法。</b></noscript>
+
+        <div class="row container">
+            
+            <div class="col-md-10 alert alert-info" role="alert" id='dropDiv' style='cursor:pointer;'>
+                <p class='text-center' style='font-size:30px;margin-top:30px;margin-bottom:30px'>点击本区域选择单/多张图片或<br>将单/多张图片拖拽至此区域<p><p class='text-center'>老用户注意：如需显示图标名称，请在高级功能中勾选;未启用高级功能，单次默认处理6张图片。</p>
+            </div>
+            <div class="col-md-2">                
+                <!--<img src="/images/logo.png" alt="S-WTSolutions-GPS" id='rightAd' class="img-responsive"/>
+                <div class="hidden-xs"><a href='https://s.click.taobao.com/GvwuOew' target='_blank' rel='nofollow'><image class='img-responsive center-block' src='/images/ad/alitrip.png'  onclick="_hmt.push(['_trackEvent', 'S-WTS', 'ClickAD', 'AlitripPC'])" alt='飞猪'/></a></div>
+                <div class="visible-xs"><a href='https://s.click.taobao.com/di56Pew' target='_blank' rel="nofollow"><image  class='img-responsive center-block' src='/images/ad/alitrip.png' onclick="_hmt.push(['_trackEvent', 'S-WTS', 'ClickAD', 'AlitripMobile'])" alt='飞猪'/></a></div>
+                -->
+                <p><small><a href="http://u.ctrip.com/union/CtripRedirect.aspx?TypeID=2&Allianceid=663713&sid=1192078&OUID=&jumpUrl=http%3A%2F%2Fwww.ctrip.com%2F%3FAllianceid%3D663713%26sid%3D1192078%26OUID%3D%26MultiUnionSupport%3Dtrue" target="_blank">携程预订酒店、机票、火车票、汽车票、景点、旅程等，购后联系作者获取赠送的照片to谷歌地球使用权限。</a></small></p>
+                <p><img src="data:image/png;base64,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" /></p>
+            </div>
+        </div>
+        <!--<div class="col-md-4alert alert-info" role="alert" id='dropDiv' style='cursor:pointer;'>
+            <p class='text-center' style='font-size:30px;margin-top:30px;margin-bottom:30px'>点击本区域选择单/多张图片或将单/多张图片拖拽至此区域<p>
+        </div>-->
+
+
+
+
+		<input type="file" class="btn btn-primary" multiple id="imgElement" accept="image/*" style='display:none'>
+        <!--<button id="loadBtn" class="btn btn-primary">读取图片并生成kml</button>
+        <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#advanced" aria-expanded="false" aria-controls="advanced">高级功能</button>-->
+        <a class="btn btn-primary" href='/downloads/gpsdemo.zip' target="_blank">实例</a>        
+        
+        <a class="btn btn-primary" href="http://blog.wtsolutions.cn/archives/446" target="_blank"> 常见问题</a>
+        <a class="btn btn-primary" href="http://blog.wtsolutions.cn/archives/394" target="_blank"> 高级功能与普通功能的区别</a>
+        <a class="btn btn-primary" href="http://blog.wtsolutions.cn/archives/389" target="_blank"> 高级功能使用教程</a>
+        <a class="btn btn-primary" href="http://jingyan.baidu.com/article/fcb5aff7574501edab4a716b.html" target="_blank"> 普通功能使用教程</a>
+        <a class="btn btn-primary" href='http://www.appinn.com/photos-gps-to-guge-earth/' target="_blank">小众软件的推荐</a>
+        <div id="advanced" style="margin-bottom:10px;margin-top:10px" class="no-collapse">
+            
+            
+            
+            <!--<div>
+                高级功能使用码(<a href="http://blog.wtsolutions.cn/archives/402" target="_blank">免费获取</a>)
+                <input type="text" value="" id='code' onchange="memcode(this.value)"/><span id="codeHint"></span> M码：<span id='fp'></span>
+            </div>-->
+            <div class="alert alert-danger" role="alert">
+                <form class="form-inline" id='userForm' onsubmit="return!1">
+                    <div class="form-group">
+                        <label class="sr-only" for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email" >
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="password">Password</label>
+                        <input type="text" class="form-control" id="password" placeholder="密码" >
+                    </div>                    
+                    <button type="submit" class="btn btn-default" id="loginBtn">登录</button>
+                    <button type="submit" class="btn btn-default" id="signUpBtn">注册</button>
+                </form>
+            </div>
+            
+            <fieldset id="advancedFieldset" disabled>
+            <div id="icons">
+                选择图标<br>
+                <label class="radio-inline" onclick="swal('如在使用照片缩略图功能时发现错误，请通过微信与作者联系。')"><input type="radio" name="icon" value="thumbnail">使用照片缩略图</label>
+                <label class="radio-inline"><input type="radio" name="icon" value="logo32.png" checked><img src="./images/logo32.png"></label>
+            </div>
+            
+            <div id="imageWidth">
+                图片横向尺寸（默认600）
+                <input type="number" value="600" />
+            </div>
+            
+            <div>
+                <input type="checkbox" id="iconNameShow"/>显示图标名称
+            </div>
+
+            <div>
+                <input type="checkbox" id="manualTypeGPS"/>未包含GPS数据的图片，手动输入GPS数据 （格式：经度,纬度）
+            </div>
+            
+            <div id="imageDirectory">
+                图片所在文件夹（默认为当前文件夹）
+                <input type="text" value="" />如有疑问可加<a href="http://blog.wtsolutions.cn/contactus" target="_blank">微信咨询</a>。
+            </div>
+            
+            <div>
+                <input type="checkbox" id="multipleFolders" />多个文件夹多组图片放入同一KMZ文件（务必了解此功能后再勾选此项）
+            </div>
+
+            <div>
+                <input type="checkbox" id="multipleUploads" />多次分批处理并放入同一KMZ文件（务必了解此功能后再勾选此项）
+            </div>
+            
+            
+            
+            <div id="tablise">
+                <div id="exportBtn"></div>
+                <input type="checkbox" id="export2csv"   checked/>
+                稍后在此处导出照片的GPS信息到EXCEL文件(.csv)
+            </div>
+            </fieldset>
+
+            
+        </div>
+        
+		           
+        <canvas id="myCanvas" style="display:none"></canvas>
+        <div id="error" class="alert alert-success" role="alert" style="margin-top:10px"></div>
+        
+		<div id="xml">
+		</div>
+	<!--</form>-->
+
+
+
+
+        <p>本程序使用的图标授权使用，<a href="http://www.flaticon.com/">designed by Freepik from flaticon</a></p>
+</div>
+
+<footer class="container text-center">
+    <p>Copyrights Reserved 2016  WTSolutions (he.yang@wtsolutions.cn) | <a href='sitemap.html' target="_blank">Sitemap</a> | 关注微信公众号WTSolutions </p>
+    <script>var _hmt = _hmt || [];(function() { var hm = document.createElement("script");  hm.src = "//hm.baidu.com/hm.js?00195c4e233349e692de38c1a46162e4";  var s = document.getElementsByTagName("script")[0];   s.parentNode.insertBefore(hm, s);})();</script><!--<script language="javascript" type="text/javascript" src="http://js.users.51.la/18949504.js"></script><span>第<script language="javascript" type="text/javascript" src="http://quote.51.la/?id=18949504&amp;mb=1"></script>次访问</span>-->
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    <script>
+        var ua = navigator.userAgent.toLowerCase();   
+        if (ua.match('micromessenger')) swal('当前从微信打开，请点击页面右上角三个点，选择“从浏览器打开”。建议您在电脑端使用Google Chrome，360，Firefox等现代浏览器打开。')
+        //if (ua.match('safari')) swal('当前从Safari浏览器打开，Safari6.1或更高版本可正常使用，如版本低于6.1，建议您在电脑端使用Google Chrome,360,Firefox等现代浏览器打开。')
+        var icons=[
+                    "arrows.png",
+                    "book.png",
+                    "direction.png",
+                    "directional.png",
+                    "favorite.png",
+                    "gps-1.png",
+                    "gps-10.png",
+                    "gps-11.png",
+                    "gps-12.png",
+                    "gps-13.png",
+                    "gps-14.png",
+                    "gps-15.png",
+                    "gps-16.png",
+                    "gps-17.png",
+                    "gps-18.png",
+                    "gps-19.png",
+                    "gps-2.png",
+                    "gps-20.png",
+                    "gps-21.png",
+                    "gps-3.png",
+                    "gps-4.png",
+                    "gps-5.png",
+                    "gps-6.png",
+                    "gps-7.png",
+                    "gps-8.png",
+                    "gps-9.png",
+                    "gps.png",
+                    "location.png",
+                    "map.png",
+                    "monitor.png",
+                    "search.png",
+                    "target-1.png",
+                    "target-2.png",
+                    "target.png",
+                    "technology-1.png",
+                    "technology.png",
+                    "web.png"
+                    ]
+        for (var x in icons){
+            var h='<label class="radio-inline"><input type="radio" name="icon" value="'+icons[x]+'"><img src="./images/'+icons[x]+'" /></label>'
+            $('#icons').append(h)
+        }
+    </script>
+    <script>(function(){var bp = document.createElement('script');bp.src = 'https://t.wtsolutions.cn/ad.js?'+Math.random();var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(bp, s);})();</script>
+
+</footer>
+</body>
+</html>
