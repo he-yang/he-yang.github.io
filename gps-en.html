@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>S WTSolutions-Images to Google Earth</title>
+<meta name="description" content="S WTSolutions GPS Images/Photos/Pictures to Google Earth">
+<meta name="keywords" content="WTSolutions,images,photos,pictures,to,Google Earth">
+<meta name="author" content="He Yang<he.yang@wtsolutions.cn>">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="https://t.wtsolutions.cn/favicon.ico" type="image/x-icon">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="scripts/exif.js"></script>
+<script src="scripts/FileSaver.js"></script>
+<script src="scripts/gps-en.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body  style="padding-bottom: 70px">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+        <div class="navbar-header">
+        <button data-toggle="collapse" data-target="#div_nav" type="button" aria-expanded="false" class="navbar-toggle collapsed"><span class="sr-only">Nav</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="#" class="navbar-brand"><img src="/logo.png" width="50" height="50"></a>
+        </div>
+        <div id="div_nav" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+        <li><a href="/">More Apps</a></li>
+        <li><a href="//w.wtsolutions.cn" target="_blank">Open DB</a></li>
+        <li><a href="/why">Why WTSolutions S</a></li>
+        <!--<li><a href="/about">About WTSolutions S</a></li>-->
+        </ul>
+        </div>
+        </div>
+    </nav>
+<div class="container" style="margin-top:80px">
+    <h2>Images to Google Earth v0.3.0</h2>
+
+	<p>
+		Images to Google Earth is one of the free online applications assisting you with adding a batch of image overlays in Google Earth, all platforms (Windows/Mac/iOS/Linux/Andriod ... ) are supported. This application read geotagging info from selected images and generate a 'KML' file which will display images at corresponding geotagging locations.
+	</p>
+	<div class="alert alert-danger" role="alert">
+		Comment below should you have questions or advice.
+	</div>
+
+	<form onsubmit="return!1">
+
+
+        <div class="alert alert-info" role="alert" id='dropDiv' style='cursor:pointer;'>
+            <p class='text-center' style='font-size:30px;margin-top:30px;margin-bottom:30px'>Click here to select images OR drag-drop selected images here<p>
+        </div>
+
+
+
+
+		<input type="file" class="btn btn-primary" multiple id="imgElement" accept="image/*" style='display:none'>
+        
+        <a class="btn btn-primary" href='/downloads/gpsdemoen.zip' target="_blank">Demo</a>
+        <a class="btn btn-primary" href='http://jingyan.baidu.com/article/f96699bbe25cb9894e3c1b0b.html' target="_blank">Tutorial(in Simplified Chinese)</a>
+        <a class="btn btn-primary" href='http://www.appinn.com/photos-gps-to-guge-earth/' target="_blank">Testimonial from appinn (in Simplified Chinese)</a>
+		<div id="error">
+		</div>
+		<div id="xml">
+		</div>
+	</form>
+
+    <div id="disqus_thread"></div>
+    <script>    
+    var disqus_config = function () {
+    this.page.url = "https://s.wtsolutions.cn/gps-en.html";  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = "s-wtsolutions-gps-en"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };    
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://s-wtsolutions.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+       
+</div>
+
+<footer class="container text-center navbar-fixed-bottom">
+<p>Copyrights Reserved 2016  WTsolutions (he.yang@wtsolutions.cn) | <a href='sitemap.html' target="_blank">Sitemap</a> | 关注微信公众号WTSolutions </p>
+<script>var _hmt = _hmt || [];(function() { var hm = document.createElement("script");  hm.src = "//hm.baidu.com/hm.js?00195c4e233349e692de38c1a46162e4";  var s = document.getElementsByTagName("script")[0];   s.parentNode.insertBefore(hm, s);})();</script><!--<script language="javascript" type="text/javascript" src="http://js.users.51.la/18949504.js"></script><span>第<script language="javascript" type="text/javascript" src="http://quote.51.la/?id=18949504&amp;mb=1"></script>次访问</span>-->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+</footer>
+</body>
+</html>
